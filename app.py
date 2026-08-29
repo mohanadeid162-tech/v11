@@ -1193,7 +1193,6 @@ def shopify_checker():
 
 @app.route('/shopii', methods=['GET'])
 def shopii_checker():
-    """Shopify checker with CAPTCHA solving support."""
     auth_err = _require_auth()
     if auth_err:
         return auth_err
