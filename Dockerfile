@@ -13,5 +13,5 @@ COPY app.py .
 
 EXPOSE 5000
 
-CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-5000} --workers 2 --timeout 150"]
+CMD gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 150
 
