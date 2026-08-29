@@ -1,5 +1,6 @@
 FROM python:3.11-slim
 
+# System deps for aiohttp
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     && rm -rf /var/lib/apt/lists/*
@@ -13,4 +14,4 @@ COPY app.py .
 
 EXPOSE 5000
 
-CMD gunicorn app:app --bind 0.0.0.0:5000 --workers 2 --timeout 150 --worker-class sync --access-logfile - --error-logfile -
+CMD ["python", "app.py"]
