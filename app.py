@@ -1196,14 +1196,15 @@ def shopii_checker():
     """Same as /shopify but with live hCaptcha solving when CAPTCHA_SOLVER_KEY is set.
 
     Query params:
-        cc      — card in CC|MM|YYYY|CVV format (required)
-        site    — Shopify store URL (required)
-        proxy   — proxy in ip:port or ip:port:user:pass format (optional)
-        api_key — auth key if API_KEY env var is set (or use X-API-Key header)
+        cc      - card in CC|MM|YYYY|CVV format (required)
+        site    - Shopify store URL (required)
+        proxy   - proxy in ip:port or ip:port:user:pass format (optional)
+        api_key - auth key if API_KEY env var is set (or use X-API-Key header)
     """
     auth_err = _require_auth()
     if auth_err:
         return auth_err
+
 
     client_ip = (
         request.headers.get('X-Forwarded-For', request.remote_addr or '')
