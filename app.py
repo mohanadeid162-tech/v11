@@ -990,14 +990,14 @@ def parse_cc_string(cc_string):
     }
 
 async def solve_hcaptcha_async(checkout_url: str, proxy: str | None = None) -> str | None:
-    """Solve hCaptcha challenge using 2captcha-compatible API."""
+    """Solve hCaptcha challenge using external API."""
     api_key = os.environ.get('CAPTCHA_SOLVER_KEY', '')
     if not api_key:
         return None
 
     api_base = os.environ.get('CAPTCHA_SOLVER_URL', 'https://2captcha.com').rstrip('/')
     # Well-known Shopify checkout hCaptcha sitekey — overridden if found on page
-    sitekey  = 'a5f74b19-9e45-40e0-b45d-47ff91b7a6c2'
+    sitekey = 'a5f74b19-9e45-40e0-b45d-47ff91b7a6c2'
     solver_proxy = parse_proxy(proxy) if proxy else None
 
     connector = aiohttp.TCPConnector(ssl=False)
