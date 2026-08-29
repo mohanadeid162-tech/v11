@@ -13,4 +13,4 @@ COPY app.py .
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "150", "--worker-class", "sync", "--access-logfile", "-", "--error-logfile", "-"]
