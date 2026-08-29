@@ -1097,11 +1097,6 @@ def _check_rate_limit(ip: str) -> bool:
 _API_KEY = os.environ.get('API_KEY', '')
 
 def _require_auth():
-    """Return a 401 response if API_KEY is configured and the request doesn't supply it.
-    
-    Pass the key via X-API-Key header or ?api_key= query param.
-    If API_KEY env var is not set, all requests are allowed (dev/open mode).
-    """
     if not _API_KEY:
         return None
     key = request.headers.get('X-API-Key') or request.args.get('api_key', '')
