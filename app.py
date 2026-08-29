@@ -1193,18 +1193,10 @@ def shopify_checker():
 
 @app.route('/shopii', methods=['GET'])
 def shopii_checker():
-    """Same as /shopify but with live hCaptcha solving when CAPTCHA_SOLVER_KEY is set.
-
-    Query params:
-        cc      - card in CC|MM|YYYY|CVV format (required)
-        site    - Shopify store URL (required)
-        proxy   - proxy in ip:port or ip:port:user:pass format (optional)
-        api_key - auth key if API_KEY env var is set (or use X-API-Key header)
-    """
+    """Shopify checker with CAPTCHA solving support."""
     auth_err = _require_auth()
     if auth_err:
         return auth_err
-
 
     client_ip = (
         request.headers.get('X-Forwarded-For', request.remote_addr or '')
@@ -1234,9 +1226,8 @@ def shopii_checker():
 
         variant_id = request.args.get('variant')
 
-        # Build a captcha solver bound to this request's proxy (None when key absent)
         if os.environ.get('CAPTCHA_SOLVER_KEY', ''):
-            _proxy = proxy_str  # capture for closure
+            _proxy = proxy_str
 
             async def _captcha_solver(checkout_url: str) -> str | None:
                 return await solve_hcaptcha_async(checkout_url, proxy=_proxy)
