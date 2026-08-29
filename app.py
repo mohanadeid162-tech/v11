@@ -155,7 +155,7 @@ async def make_graphql_request_with_captcha_handling(
 ):
     """Make a GraphQL request with automatic retry on network errors.
 
-    captcha_solver_fn — optional async callable(checkout_url) -> token | None.
+    captcha_solver_fn: optional async callable(checkout_url) -> token | None.
         When provided and CAPTCHA is detected, the solver is called and its token
         is injected as x-checkout-captcha-response on the retry request.
         Without a solver the raw CAPTCHA response is returned immediately.
