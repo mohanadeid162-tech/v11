@@ -991,12 +991,9 @@ def parse_cc_string(cc_string):
 
 async def solve_hcaptcha_async(checkout_url: str, proxy: str | None = None) -> str | None:
     """Solve an hCaptcha challenge for a Shopify checkout URL.
-
-    Reads env vars:
-        CAPTCHA_SOLVER_KEY  - 2captcha-compatible API key (required to enable)
-        CAPTCHA_SOLVER_URL  - service base URL (default https://2captcha.com)
-                              CapMonster: https://api.capmonster.cloud
-    Returns the solved token string, or None on failure / not configured.
+    
+    Requires CAPTCHA_SOLVER_KEY env var.
+    Optional CAPTCHA_SOLVER_URL env var (default: https://2captcha.com).
     """
     api_key = os.environ.get('CAPTCHA_SOLVER_KEY', '')
     if not api_key:
