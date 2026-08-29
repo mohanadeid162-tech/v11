@@ -1098,6 +1098,7 @@ _API_KEY = os.environ.get('API_KEY', '')
 
 def _require_auth():
     """Return a 401 response if API_KEY is configured and the request doesn't supply it.
+    
     Pass the key via X-API-Key header or ?api_key= query param.
     If API_KEY env var is not set, all requests are allowed (dev/open mode).
     """
